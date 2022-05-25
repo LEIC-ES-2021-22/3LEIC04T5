@@ -67,9 +67,9 @@ class ExamsList extends StatelessWidget {
       columns.add(this.createExamCard(context, [exams[0]]));
       return columns;
     }
-
+ 
     final List<Exam> currentDayExams = <Exam>[];
-
+ 
     for (int i = 0; i < exams.length; i++) {
       if (i + 1 >= exams.length) {
         if (exams[i].day == exams[i - 1].day &&
@@ -129,9 +129,11 @@ class ExamsList extends StatelessWidget {
             child: ScheduleRow(
                 subject: exam.subject,
                 rooms: exam.rooms,
-                begin: exam.begin,
-                end: exam.end,
-                type: exam.examType,
-                date: exam.date)));
+               begin: exam.begin,
+               end: exam.end,
+               type: exam.examType,
+               date: exam.date
+                   )
+               ));
   }
 }

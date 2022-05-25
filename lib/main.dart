@@ -17,6 +17,7 @@ import 'package:uni/view/Pages/bus_stop_next_arrivals_page.dart';
 import 'package:uni/view/Pages/exams_page_view.dart';
 import 'package:uni/view/Pages/home_page_view.dart';
 import 'package:uni/view/Pages/logout_route.dart';
+import 'package:uni/view/Pages/moodle_page_view.dart';
 import 'package:uni/view/Pages/splash_page_view.dart';
 import 'package:uni/view/Widgets/page_transition.dart';
 import 'package:uni/view/navigation_service.dart';
@@ -43,6 +44,7 @@ Future<void> main() async {
           'https://a2661645df1c4992b24161010c5e0ecb@o553498.ingest.sentry.io/5680848';
     },
     appRunner: () => {runApp(MyApp())},
+
   );
 }
 
@@ -91,6 +93,9 @@ class MyAppState extends State<MyApp> {
               case '/' + Constants.navExams:
                 return PageTransition.makePageTransition(
                     page: ExamsPageView(), settings: settings);
+             case '/' + Constants.navCalendar:
+               return PageTransition.makePageTransition(
+                 page : MoodlePageView(),settings: settings);
               case '/' + Constants.navStops:
                 return PageTransition.makePageTransition(
                     page: BusStopNextArrivalsPage(), settings: settings);
