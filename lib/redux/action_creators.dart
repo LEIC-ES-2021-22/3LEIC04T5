@@ -256,6 +256,10 @@ ThunkAction<AppState> getUserExams(Completer<Null> action,
   };
 }
 
+//Future<List<Exam>> extractDeadlines(
+//    Store<AppState> store,
+//)
+
 ThunkAction<AppState> getUserSchedule(
     Completer<Null> action, Tuple2<String, String> userPersistentInfo,
     {ScheduleFetcher fetcher}) {

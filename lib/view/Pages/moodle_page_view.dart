@@ -32,7 +32,7 @@ class MoodlePageViewState extends SecondaryPageViewState {
      },
      builder: (context,deadlines) {
        return DeadLinesList(deadlines: deadlines);
-     }
+     },
    );
  }
 }
@@ -44,13 +44,40 @@ class DeadLinesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+ //   return ListView(
+ //     children: <Widget>[
+ //       Container(
+ //         child: Column(
+ //           mainAxisSize: MainAxisSize.max,
+ //           children: this.createDeadlineColumn(context, deadlines),
+ //         ),
+ //       ),
+ //       Container(
+ //         width: MediaQuery.of(context).size.width,
+ //         height: MediaQuery.of(context).size.height - kToolbarHeight,
+ //         child: Align(
+ //           alignment: Alignment(.2,-.7),
+ //           child: Container(
+ //             height: 120,
+ //             width: 350,
+ //             decoration: BoxDecoration(
+ //               color: Color.fromRGBO(224, 224, 224, 10),
+ //               borderRadius: BorderRadius.circular(10),
+ //             ),
+ //
+ //           ),
+ //
+ //         ),
+ //       ),
+ //     ],
+ //   );
+
     return ListView(
       children: <Widget>[
         Container(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: this.createDeadlineColumn(context, deadlines),
-
           ),
         )
       ],
@@ -120,7 +147,7 @@ class DeadLinesList extends StatelessWidget {
           ScheduleRowMoodle(
               subject: deadline.subject,
               type: deadline.deadlinetype,
-              date: deadline.date
+              //date: deadline.date
           )
         ));
   }

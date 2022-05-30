@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:logger/logger.dart';
 import 'package:uni/controller/bus_stops/departures_fetcher.dart';
 import 'package:uni/controller/local_storage/app_shared_preferences.dart';
+import 'package:uni/model/entities/SessionMoodle.dart';
 import 'package:uni/model/entities/bus.dart';
 import 'package:uni/model/entities/bus_stop.dart';
 import 'package:uni/model/entities/course_unit.dart';
@@ -51,6 +52,30 @@ class NetworkRouter {
     }
   }
 
+  /// Creates an authenticated [moodle_Session] with
+  /// given username [user] and password[pass].
+  static Future<moodle_Session> login_moodle(
+      String user, String pass, bool persistentSession) async {
+    final String url2 =
+        'https://wayf.up.pt/idp/profile/SAML2/Redirect/SSO?execution=e8s2';
+    final http.Response response = await http.post(url2.toUri(), body:  {
+      'j_username': user,
+      'j_password': pass
+    }).timeout(const Duration(seconds: loginRequestTimeout));
+
+    if (response.statusCode == 200) {
+      final moodle_Session moodle_session = moodle_Session.fromMoodlelogin(
+          response);
+      moodle_session.persistantSession1 = persistentSession;
+      Logger().i('Login successful');
+      return moodle_session;
+  } else {
+      Logger().e('Login failed');
+      return moodle_Session(authenticated1: false);
+    }
+  }
+
+
   /// Determines if a re-login with the [session] is possible.
   static Future<bool> relogin(Session session) {
     return loginLock.synchronized(() async {
@@ -63,6 +88,23 @@ class NetworkRouter {
       } else {
         return session.loginRequest = loginFromSession(session).then((_) {
           session.loginRequest = null;
+        });
+      }
+    });
+  }
+
+  ///Determinates if a re-login with the [moodle_Session] is possible.
+  static Future<bool> reLoginM(moodle_Session moodle_session) {
+    return loginLock.synchronized(() async {
+      if (!moodle_session.persistantSession1) {
+        return false;
+      }
+
+      if (moodle_session.loginRequest1 != null) {
+        return moodle_session.loginRequest1;
+      } else {
+        return moodle_session.loginRequest1 = loginFromSessionM(moodle_session).then((_) {
+          moodle_session.loginRequest1 = null;
         });
       }
     });
@@ -84,6 +126,29 @@ class NetworkRouter {
       session.type = responseBody['tipo'];
       session.cookies = NetworkRouter.extractCookies(response.headers);
       Logger().i('Re-login successful');
+      return true;
+    } else {
+      Logger().e('Re-login failed');
+      return false;
+    }
+  }
+
+  /// Re-authenticates the user [moodle_Session].
+  static Future<bool> loginFromSessionM(moodle_Session moodle_session) async {
+    Logger().i('Trying to login to moodle...');
+    final String url2 =
+        'https://wayf.up.pt/idp/profile/SAML2/Redirect/SSO?execution=e8s2';
+    final http.Response response = await http.post(url2.toUri(), body: {
+      'j_username': moodle_session.studentNumber + '@fe.up.pt',
+      'j_password': await AppSharedPreferences.getUserPassword(),
+    }).timeout(const Duration(seconds: loginRequestTimeout));
+    final responseBody = json.decode(response.body);
+    if (response.statusCode == 200 && responseBody['authenticated']) {
+      moodle_session.authenticated1 = true;
+      moodle_session.studentNumber = responseBody['codigo'];
+      moodle_session.type = responseBody['tipo'];
+      moodle_session.coockies = NetworkRouter.extractCookies(response.headers);
+      Logger().i('Re-Login successful');
       return true;
     } else {
       Logger().e('Re-login failed');
@@ -135,6 +200,45 @@ class NetworkRouter {
     }
     return <CourseUnit>[];
   }
+
+  ///Makes an authenticated GET request with the given [moodle_Session] to the
+  ///resource located at [url] with the given [query] parameters
+  static Future<http.Response> getWithCookiesM(
+      String baseurl, Map<String,String> query, moodle_Session moodle_session) async {
+    final loginSuccessful = await moodle_session.loginRequest1;
+    if (loginSuccessful is bool && !loginSuccessful) {
+      return Future.error('Login failed');
+    }
+
+    final URLQueryParams params = URLQueryParams();
+    query.forEach((key, value) {
+      params.append(key, value);
+    });
+
+    final url = baseurl + params.toString();
+
+    final Map<String, String> headers = Map<String, String>();
+    headers['cookie'] = moodle_session.coockies;
+    final http.Response response = await (httpClient != null
+        ? httpClient.get(url.toUri(), headers: headers)
+        : http.get(url.toUri(), headers: headers));
+    if (response.statusCode == 200) {
+      return response;
+    } else if (response.statusCode == 403) {
+      final bool sucess = await reLoginM(moodle_session);
+      if (sucess) {
+        headers['cookie'] = moodle_session.coockies;
+        return http.get(url.toUri(), headers: headers);
+      } else {
+        onReloginFail();
+        Logger().e('Login failed');
+        return Future.error('Login failed');
+      }
+    } else {
+      return Future.error('HTTP Error ${response.statusCode}');
+    }
+  }
+
 
   /// Makes an authenticated GET request with the given [session] to the
   /// resource located at [url] with the given [query] parameters.
@@ -225,6 +329,11 @@ class NetworkRouter {
   /// Returns the base url of the user's faculty.
   static String getBaseUrl(String faculty) {
     return 'https://sigarra.up.pt/$faculty/pt/';
+  }
+
+  /// Returns the base url of the user's moodle
+  static String getMoodleUrl () {
+    return 'https://moodle.up.pt/my/';
   }
 
   /// Returns the base url from the user's previous session.
