@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uni/model/entities/lecture.dart';
+import 'package:uni/view/Pages/LectureInfo_page_view.dart';
 import 'package:uni/view/Widgets/row_container.dart';
 
 class ScheduleSlot extends StatelessWidget {
@@ -10,7 +12,7 @@ class ScheduleSlot extends StatelessWidget {
   final String teacher;
   final String typeClass;
   final String classNumber;
-
+  final Lecture lecture;
   ScheduleSlot({
     Key key,
     @required this.subject,
@@ -18,6 +20,7 @@ class ScheduleSlot extends StatelessWidget {
     @required this.rooms,
     @required this.begin,
     @required this.end,
+    this.lecture,
     this.teacher,
     this.classNumber,
   }) : super(key: key);
@@ -27,7 +30,7 @@ class ScheduleSlot extends StatelessWidget {
     return RowContainer(
         child: Container(
       padding:
-          EdgeInsets.only(top: 10.0, bottom: 10.0, left: 22.0, right: 22.0),
+          EdgeInsets.only(top: 10.0, bottom: 10, left: 22.0, right: 22.0),
       child: createScheduleSlotRow(context),
     ));
   }
@@ -80,6 +83,13 @@ class ScheduleSlot extends StatelessWidget {
             children: <Widget>[
               subjectTextField,
               typeClassTextField,
+              TextButton(
+                child: Text('INFO'),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => InfoList()));
+                  },
+                ),
             ],
           ),
           Row(
@@ -87,9 +97,23 @@ class ScheduleSlot extends StatelessWidget {
               createScheduleSlotTeacherInfo(context),
               createScheduleSlotClass(context)
             ],
-          )
-        ],
-      ),
+          ),
+
+         ],
+     ),
+     //   ButtonTheme(
+     //     minWidth: 0,
+     //       padding: EdgeInsets.only(right: 0),
+     //       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+     //       shape: RoundedRectangleBorder(),
+     //       child: TextButton (
+     //         onPressed: () {
+     //
+     //         },
+     //
+     //
+     //       ))
+
       createScheduleSlotPrimInfoColumn(roomTextField)
     ];
   }

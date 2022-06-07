@@ -88,6 +88,7 @@ class ScheduleCard extends GenericCard {
       rows.add(DateRectangle(date: Lecture.dayName[lectures[0].day % 7]));
       rows.add(createRowFromLecture(context, lectures[0]));
     }
+
     return rows;
   }
 
@@ -106,6 +107,7 @@ class ScheduleCard extends GenericCard {
 
   @override
   String getTitle() => 'Horário';
+
 
   @override
   onClick(BuildContext context) =>

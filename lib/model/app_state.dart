@@ -18,6 +18,7 @@ class AppState {
   Map getInitialContent() {
     return {
       'schedule': <Lecture>[],
+      'Info': <Lecture>[],
       'exams': <Exam>[],
       'moodle': <DeadLines>[],
       'restaurants': <Restaurant>[],

@@ -1,5 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:logger/logger.dart';
+import 'package:uni/redux/action_creators.dart';
 
 /// Stores information about a lecture.
 class Lecture {
@@ -174,3 +175,4 @@ class Lecture {
       this.blocks == o.blocks &&
       this.startTimeSeconds == o.startTimeSeconds;
 }
+
