@@ -23,8 +23,8 @@ class LectureInfoPageState extends SecondaryPageViewState {
 }
 
 class InfoList extends StatelessWidget {
- // final Lecture lecture;
-  InfoList ({Key key}): super(key: key);
+  final List<Lecture> lecture;
+  InfoList ({Key key, @required this.lecture}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class InfoList extends StatelessWidget {
         Container(
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: this.createInfoColumn(context),
+            children: this.createInfoColumn(context,lecture),
           ),
         ),
       ],
@@ -41,10 +41,10 @@ class InfoList extends StatelessWidget {
   }
   
   ///creates a column with all the user's exams. 
-  List<Widget> createInfoColumn(context) {
+  List<Widget> createInfoColumn(context,lecture) {
     final List<Widget> columns = <Widget>[];
     columns.add(InfoPageTitle(
-      name: Lecture.,
+      name: lecture.subject,
     ));
 
     return columns;
