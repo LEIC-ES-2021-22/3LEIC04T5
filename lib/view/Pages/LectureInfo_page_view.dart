@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:uni/model/app_state.dart';
 import 'package:uni/model/entities/lecture.dart';
 import 'package:uni/view/Pages/secondary_page_view.dart';
 import 'package:uni/view/Widgets/Lecture_page_title.dart';
-import 'package:uni/view/Widgets/request_dependent_widget_builder.dart';
 
 class LectureInfoPageView extends StatefulWidget {
   @override
@@ -30,23 +30,38 @@ class InfoList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
+    Theme(
+    data: Theme.of(context).copyWith(
+      scaffoldBackgroundColor: Colors.indigo,
+    ),
+    ),
         Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: this.createInfoColumn(context,lecture),
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              'Some text here',
+            ),
           ),
         ),
+
       ],
     );
+   //       Container(
+   //       child: Column(
+   //         mainAxisSize: MainAxisSize.max,
+   //         children: this.createInfoColumn(context,lecture),
+   //       ),
+   //     ),
+
   }
   
   ///creates a column with all the user's exams. 
-  List<Widget> createInfoColumn(context,lecture) {
-    final List<Widget> columns = <Widget>[];
-    columns.add(InfoPageTitle(
-      name: lecture.subject,
-    ));
-
-    return columns;
-  }
+ // List<Widget> createInfoColumn(context) {
+ //   final List<Widget> columns = <Widget>[];
+ //   columns.add(InfoPageTitle(
+ //     name: 'ES',
+ //   ));
+ //
+ //   return columns;
+ // }
 }

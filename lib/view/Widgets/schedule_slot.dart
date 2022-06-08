@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uni/model/entities/lecture.dart';
+import 'package:uni/view/Pages/ES_page_view.dart';
 import 'package:uni/view/Pages/LectureInfo_page_view.dart';
+import 'package:uni/view/Pages/moodle_page_view.dart';
 import 'package:uni/view/Widgets/row_container.dart';
 
 class ScheduleSlot extends StatelessWidget {
@@ -87,7 +89,7 @@ class ScheduleSlot extends StatelessWidget {
                 child: Text('INFO'),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => InfoList()));
+                        MaterialPageRoute(builder: (context) => InfoListEs()));
                   },
                 ),
             ],

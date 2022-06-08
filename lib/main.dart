@@ -11,7 +11,6 @@ import 'package:uni/model/app_state.dart';
 import 'package:uni/redux/actions.dart';
 import 'package:uni/redux/reducers.dart';
 import 'package:uni/utils/constants.dart' as Constants;
-import 'package:uni/view/Pages/Tc_view.dart';
 import 'package:uni/view/Pages/about_page_view.dart';
 import 'package:uni/view/Pages/bug_report_page_view.dart';
 import 'package:uni/view/Pages/bus_stop_next_arrivals_page.dart';
@@ -84,30 +83,30 @@ class MyAppState extends State<MyApp> {
           navigatorKey: NavigationService.navigatorKey,
           // ignore: missing_return
           onGenerateRoute: (RouteSettings settings) {
-            switch (settings.name) {
-              case '/' + Constants.navPersonalArea:
-                return PageTransition.makePageTransition(
-                    page: HomePageView(), settings: settings);
-              case  '/' + Constants.navSchedule:
-                return PageTransition.makePageTransition(
-                    page: SchedulePage(), settings: settings);
-              case '/' + Constants.navExams:
-                return PageTransition.makePageTransition(
-                    page: ExamsPageView(), settings: settings);
-             case '/' + Constants.navCalendar:
-               return PageTransition.makePageTransition(
-                 page : MoodlePageView(),settings: settings);
-              case '/' + Constants.navStops:
-                return PageTransition.makePageTransition(
-                    page: BusStopNextArrivalsPage(), settings: settings);
-              case '/' + Constants.navAbout:
-                return PageTransition.makePageTransition(
-                    page: AboutPageView(), settings: settings);
-              case '/' + Constants.navBugReport:
-                return PageTransition.makePageTransition(
-                    page: BugReportPageView(),
-                    settings: settings,
-                    maintainState: false);
+    switch (settings.name) {
+    case '/' + Constants.navPersonalArea:
+    return PageTransition.makePageTransition(
+    page: HomePageView(), settings: settings);
+    case  '/' + Constants.navSchedule:
+    return PageTransition.makePageTransition(
+    page: SchedulePage(), settings: settings);
+    case '/' + Constants.navExams:
+    return PageTransition.makePageTransition(
+    page: ExamsPageView(), settings: settings);
+    case '/' + Constants.navCalendar:
+    return PageTransition.makePageTransition(
+    page : MoodlePageView(),settings: settings);
+    case '/' + Constants.navStops:
+    return PageTransition.makePageTransition(
+    page: BusStopNextArrivalsPage(), settings: settings);
+    case '/' + Constants.navAbout:
+    return PageTransition.makePageTransition(
+    page: AboutPageView(), settings: settings);
+    case '/' + Constants.navBugReport:
+    return PageTransition.makePageTransition(
+    page: BugReportPageView(),
+    settings: settings,
+    maintainState: false);
               case '/' + Constants.navLogOut:
                 return LogoutRoute.buildLogoutRoute();
             }

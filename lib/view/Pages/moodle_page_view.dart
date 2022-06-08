@@ -44,34 +44,6 @@ class DeadLinesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- //   return ListView(
- //     children: <Widget>[
- //       Container(
- //         child: Column(
- //           mainAxisSize: MainAxisSize.max,
- //           children: this.createDeadlineColumn(context, deadlines),
- //         ),
- //       ),
- //       Container(
- //         width: MediaQuery.of(context).size.width,
- //         height: MediaQuery.of(context).size.height - kToolbarHeight,
- //         child: Align(
- //           alignment: Alignment(.2,-.7),
- //           child: Container(
- //             height: 120,
- //             width: 350,
- //             decoration: BoxDecoration(
- //               color: Color.fromRGBO(224, 224, 224, 10),
- //               borderRadius: BorderRadius.circular(10),
- //             ),
- //
- //           ),
- //
- //         ),
- //       ),
- //     ],
- //   );
-
     return ListView(
       children: <Widget>[
         Container(
@@ -79,9 +51,237 @@ class DeadLinesList extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: this.createDeadlineColumn(context, deadlines),
           ),
-        )
-      ],
+        ),
+        Container(
+          child: IntrinsicHeight(
+         child: Row(
+        children: <Widget>[
+        Container(
+        margin: EdgeInsets.only(top: 4.0, bottom: 12.0),
+        child: Stack(children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height - kToolbarHeight,
+          child: Align(
+            alignment: Alignment(.2,-.8),
+            child: Container(
+              height: 120,
+              width: 350,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(224, 224, 224, 10),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height - kToolbarHeight,
+          child: Align(
+            alignment: Alignment(-0,-0.68),
+            child: Text(
+              'CheckPoint',
+              style: TextStyle(color: Colors.black87,fontSize: 18,fontWeight: FontWeight.w300),
+            ),
+              ),
+              ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(0.35,-0.68),
+              child: Text(
+                'ES',
+                style: TextStyle(color: Colors.red,fontSize: 18),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(0,-0.9),
+              child: Text(
+                'Sexta, 01 de Abril',
+                style: TextStyle(color: Colors.black87,fontSize: 20,fontWeight: FontWeight.w300),
+              ),
+            ),
+          ),
+          //--------------------------
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(.2,-.2),
+              child: Container(
+                height: 70,
+                width: 350,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromRGBO(233, 233, 233, 10),
+                  ),
+                  color: Color.fromRGBO(255, 255, 255, 10),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(-0,-0.18),
+              child: Text(
+                'Kahoot',
+                style: TextStyle(color: Colors.black87,fontSize: 18,fontWeight: FontWeight.w300),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(0.30,-0.18),
+              child: Text(
+                'IA',
+                style: TextStyle(color: Colors.red,fontSize: 18),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(0,-0.33),
+              child: Text(
+                'Quarta, 06 de Abril',
+                style: TextStyle(color: Colors.black87,fontSize: 18,fontWeight: FontWeight.w300),
+              ),
+            ),
+          ),
+          //--------------------------
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(.2,0.3),
+              child: Container(
+                height: 70,
+                width: 350,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromRGBO(233, 233, 233, 10),
+                  ),
+                  color: Color.fromRGBO(255, 255, 255, 10),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(-0,0.28),
+              child: Text(
+                'CheckPoint',
+                style: TextStyle(color: Colors.black87,fontSize: 18,fontWeight: FontWeight.w300),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(0.35,0.28),
+              child: Text(
+                'DA',
+                style: TextStyle(color: Colors.red,fontSize: 18),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(0,0.13),
+              child: Text(
+                'Quarta, 20 de Abril',
+                style: TextStyle(color: Colors.black87,fontSize: 18,fontWeight: FontWeight.w300),
+              ),
+            ),
+          ),
+          //----------------------------------
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(.2,0.8),
+              child: Container(
+                height: 70,
+                width: 350,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromRGBO(233, 233, 233, 10),
+                  ),
+                  color: Color.fromRGBO(255, 255, 255, 10),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(-0,0.75),
+              child: Text(
+                'Kahoot',
+                style: TextStyle(color: Colors.black87,fontSize: 18,fontWeight: FontWeight.w300),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(0.30,0.75),
+              child: Text(
+                'IA',
+                style: TextStyle(color: Colors.red,fontSize: 18),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Align(
+              alignment: Alignment(0,0.60),
+              child: Text(
+                'Terça, 03 de Maio',
+                style: TextStyle(color: Colors.black87,fontSize: 18,fontWeight: FontWeight.w300),
+              ),
+            ),
+          ),
+          ],
+        ),
+        ),
+        ],
+          ),
+    ),
+    ),],
     );
+
+ //  return ListView(
+ //    children: <Widget>[
+ //      Container(
+ //        child: Column(
+ //          mainAxisSize: MainAxisSize.max,
+ //          children: this.createDeadlineColumn(context, deadlines),
+ //        ),
+ //      )
+ //    ],
+ //  );
   }
 
   /// Creates a column with all the user's deadlines.
