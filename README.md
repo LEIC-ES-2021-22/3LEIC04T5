@@ -140,3 +140,13 @@ DeploymentView
 For the vertical prototype we have implemented a simple credit page where we display the name of our feature and who it was developed by.
 
 <img width="405" alt="Vertical Prototype" src="https://user-images.githubusercontent.com/49955825/164213275-c05e48fa-0f6d-4c7c-bb16-9dfeaa4689fe.png">
+
+### Product Demo
+
+Simple demo showcasing product features, such as UNI app integration, Moodle Calendar, and Course specific page INFO
+
+
+https://user-images.githubusercontent.com/3297993/172739163-94ad1bbc-939c-498d-9bb5-aa123e739262.mp4
+
+
+
